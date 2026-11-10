@@ -1,21 +1,50 @@
-# Banco local: usuários, sessões, listas e cache da Liga — nunca versionar
+# ---------- Dados locais (nunca versionar) ----------
+# data/app.db guarda usuários (hash de senha), sessões, listas e o cache da Liga.
 data/
 *.db
 *.db-journal
 *.db-wal
 *.db-shm
+*.sqlite
+*.sqlite3
 
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-venv/
+# Segredos e configuração local (ex.: DATABASE_URL da fase PostgreSQL)
 .env
 .env.*
+!.env.example
+*.pem
+*.key
 
-# IDE / SO
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------- Saídas e logs ----------
+*.log
+# JPGs de want list gerados para teste fora de static/
+/*.jpg
+/exports/
+
+# ---------- IDE / SO / ferramentas ----------
 .vscode/
 .idea/
+*.swp
 .DS_Store
 Thumbs.db
 desktop.ini
+~$*
+.claude/settings.local.json
+
+# Planos de evolução: ficam só locais
+planos-de-expansao/
