@@ -1,0 +1,20 @@
+<section class="auth-card">
+  <div class="auth-brand"><svg class="brand-logo" aria-hidden="true"><use href="#i-logo"/></svg><span>Liga<span class="brand-accent">Want</span></span></div>
+  <h1>Entrar</h1>
+  <p class="muted">Monte suas want lists e gere a imagem para o grupo.</p>
+  __NOTICE__
+  __ERROR__
+  <form method="post" action="/login" class="form">
+    <input type="hidden" name="csrf_token" value="__CSRF__">
+    <div class="field">
+      <input id="login-username" placeholder=" " type="text" name="username" value="__USERNAME_VALUE__" autocomplete="username" required maxlength="32" autofocus>
+      <label for="login-username">Usuário</label>
+    </div>
+    <div class="field">
+      <input id="login-password" placeholder=" " type="password" name="password" autocomplete="current-password" required maxlength="256">
+      <label for="login-password">Senha</label>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+  </form>
+  <p class="muted small center">Não tem conta? <a href="/register">Criar conta</a></p>
+</section>

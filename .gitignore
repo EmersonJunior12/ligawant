@@ -1,0 +1,21 @@
+# Banco local: usuários, sessões, listas e cache da Liga — nunca versionar
+data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+
+# IDE / SO
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

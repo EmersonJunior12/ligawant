@@ -1,0 +1,107 @@
+<div class="page-head">
+  <div>
+    <h1>Buscar em coleção</h1>
+    <p class="muted">Cole o link de uma coleção da LigaMagic para ver quais cartas dela estão nas suas listas, e se é a mesma edição.</p>
+  </div>
+</div>
+
+<div class="editor">
+  <section class="panel">
+    <form class="collection-form" id="collection-form" novalidate>
+      <div class="field">
+        <input type="text" id="collection-url" name="collection" placeholder=" " autocomplete="off" spellcheck="false"
+               inputmode="url" aria-describedby="collection-hint">
+        <label for="collection-url">Link da coleção na LigaMagic</label>
+      </div>
+      <button type="submit" class="btn btn-primary" id="collection-submit"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>Procurar nas minhas listas</button>
+    </form>
+    <p class="field-hint" id="collection-hint">Ex.: https://www.ligamagic.com.br/?view=colecao/colecao&amp;id=438086 — a coleção precisa ser pública.</p>
+    <p class="field-hint collection-courtesy">
+      <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+      <span>A LigaMagic pede que robôs não leiam páginas de coleção. Aqui a leitura só acontece quando você clica,
+      devagar (1 página a cada 5 s, no máximo 15 páginas) e fica 1 h guardada. Se a Liga pedir pausa, o app para.</span>
+    </p>
+
+    <div class="progress-block" id="collection-progress" hidden>
+      <div class="linear-progress" role="progressbar" aria-labelledby="collection-progress-text" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <span class="linear-progress-bar" id="collection-progress-bar"></span>
+      </div>
+      <p class="muted small" id="collection-progress-text" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="panel" id="collection-results" hidden>
+    <div class="panel-head">
+      <div>
+        <h2 id="collection-title">Resultado</h2>
+        <p class="muted small" id="collection-summary"></p>
+        <p class="source-legend small">
+          <span><span class="source-tag is-mine">Lista Want</span> o que você quer</span>
+          <span><span class="source-tag is-liga">Coleção da Liga</span> o que o dono tem</span>
+        </p>
+      </div>
+      <a class="btn btn-text btn-sm" id="collection-link" href="#" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-open"/></svg>Abrir na Liga</a>
+    </div>
+    <div id="collection-groups"></div>
+    <p class="empty-inline" id="collection-empty" hidden>Nenhuma carta desta coleção está nas suas listas.</p>
+  </section>
+</div>
+
+<!-- Botão flutuante: aparece com a 1ª seleção e abre o resumo a qualquer momento da rolagem. -->
+<button type="button" class="picks-fab" id="picks-fab" hidden aria-haspopup="dialog" aria-controls="picks-drawer">
+  <svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>
+  <span class="picks-fab-label">Selecionadas</span>
+  <span class="picks-fab-count" id="picks-fab-count">0</span>
+  <span class="picks-fab-total" id="picks-fab-total"></span>
+</button>
+
+<dialog class="picks-drawer" id="picks-drawer" aria-labelledby="picks-title">
+  <div class="drawer-head">
+    <div>
+      <h2 id="picks-title">Cartas que você quer pegar</h2>
+      <p class="muted small" id="picks-count"></p>
+    </div>
+    <button type="button" class="icon-btn" data-drawer-close aria-label="Fechar resumo" title="Fechar"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="drawer-body">
+    <section class="drawer-section" aria-labelledby="picks-overview-title">
+      <h3 class="drawer-section-title" id="picks-overview-title">Resumo geral</h3>
+    <div class="totals drawer-totals">
+      <div class="total-box">
+        <span class="total-label">Seu want exato<span class="info"><button type="button" class="info-btn" aria-label="Como é calculado o total do seu want exato" aria-describedby="tip-picks-want"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg></button><span class="info-tip" role="tooltip" id="tip-picks-want"><p>Quanto custariam as cartas marcadas na edição exata das suas listas.</p><p>Preço unitário: menor preço da LigaMagic para a edição da lista, entre todas as qualidades e idiomas, × a quantidade que você vai pegar.</p></span></span></span>
+        <strong id="picks-total-want">—</strong>
+        <span class="total-missing muted small" id="picks-missing-want"></span>
+      </div>
+      <div class="total-box">
+        <span class="total-label">Valor na coleção<span class="info"><button type="button" class="info-btn" aria-label="Como é calculado o valor na coleção" aria-describedby="tip-picks-collection"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg></button><span class="info-tip" role="tooltip" id="tip-picks-collection"><p>O que a própria página da coleção mostra na coluna <b>Menor P. Compra</b>, × a quantidade.</p><p>É o número que o dono da coleção vê ao lado de cada carta.</p></span></span></span>
+        <strong id="picks-total-collection">—</strong>
+        <span class="total-missing muted small" id="picks-missing-collection"></span>
+      </div>
+    </div>
+    <p class="picks-diff muted small" id="picks-diff"></p>
+    </section>
+    <section class="drawer-section" aria-labelledby="picks-by-want-title">
+      <h3 class="drawer-section-title" id="picks-by-want-title">Para qual want vai cada carta</h3>
+      <div class="picks-groups" id="picks-list"></div>
+    </section>
+  </div>
+  <div class="drawer-actions">
+    <button type="button" class="btn btn-text" id="picks-clear">Desmarcar todas</button>
+    <button type="button" class="btn btn-primary" id="picks-message"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>Gerar mensagem</button>
+  </div>
+</dialog>
+
+<dialog class="export-dialog message-dialog" id="message-dialog" aria-labelledby="message-title">
+  <div class="dialog-body">
+    <h2 id="message-title">Mensagem para o dono</h2>
+    <p>Copie e envie pelo canal que preferir (mensagem na LigaMagic, WhatsApp…). Dá para editar antes de copiar.</p>
+    <label class="sr-only" for="message-text">Mensagem</label>
+    <textarea id="message-text" class="message-text" spellcheck="false"></textarea>
+    <div class="dialog-actions">
+      <button type="button" class="btn btn-text" value="close">Fechar</button>
+      <button type="button" class="btn btn-primary" id="message-copy"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>Copiar</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>

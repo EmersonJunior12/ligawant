@@ -1,0 +1,29 @@
+<section class="auth-card">
+  <div class="auth-brand"><svg class="brand-logo" aria-hidden="true"><use href="#i-logo"/></svg><span>Liga<span class="brand-accent">Want</span></span></div>
+  <h1>Criar conta</h1>
+  <p class="muted">Contas sem acesso por 6 meses são excluídas, com as listas.</p>
+  __ERROR__
+  <form method="post" action="/register" class="form">
+    <input type="hidden" name="csrf_token" value="__CSRF__">
+    <div>
+      <div class="field">
+      <input id="reg-username" placeholder=" " type="text" name="username" value="__USERNAME_VALUE__" autocomplete="username" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.\-]{3,32}" autofocus aria-describedby="reg-username-hint">
+      <label for="reg-username">Usuário</label>
+    </div>
+      <p class="field-hint" id="reg-username-hint">De 3 a 32 caracteres: letras, números, _ . -</p>
+    </div>
+    <div>
+      <div class="field">
+      <input id="reg-password" placeholder=" " type="password" name="password" autocomplete="new-password" required minlength="8" maxlength="256" aria-describedby="reg-password-hint">
+      <label for="reg-password">Senha</label>
+    </div>
+      <p class="field-hint" id="reg-password-hint">No mínimo 8 caracteres</p>
+    </div>
+    <div class="field">
+      <input id="reg-confirm" placeholder=" " type="password" name="confirm_password" autocomplete="new-password" required minlength="8" maxlength="256">
+      <label for="reg-confirm">Confirmar senha</label>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Criar conta</button>
+  </form>
+  <p class="muted small center">Já tem conta? <a href="/login">Entrar</a></p>
+</section>

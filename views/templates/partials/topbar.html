@@ -1,0 +1,16 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/lists" aria-label="LigaWant, minhas listas"><svg class="brand-logo" aria-hidden="true"><use href="#i-logo"/></svg><span class="brand-name">Liga<span class="brand-accent">Want</span></span></a>
+    <nav class="topbar-nav" aria-label="Principal">
+      <a class="topbar-link hide-sm" href="/lists">Minhas listas</a>
+      <a class="topbar-link hide-sm" href="/collection">Buscar em coleção</a>
+      <a class="icon-btn show-sm" href="/collection" aria-label="Buscar em coleção" title="Buscar em coleção"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></a>
+      <a class="topbar-link topbar-user" href="/profile" title="Editar perfil">__USERNAME__</a>
+      <a class="btn btn-primary btn-sm" href="/lists/new"><svg class="icon" aria-hidden="true"><use href="#i-add"/></svg>Nova lista</a>
+      <form method="post" action="/logout">
+        <input type="hidden" name="csrf_token" value="__CSRF__">
+        <button type="submit" class="icon-btn" aria-label="Sair" title="Sair"><svg class="icon" aria-hidden="true"><use href="#i-logout"/></svg></button>
+      </form>
+    </nav>
+  </div>
+</header>

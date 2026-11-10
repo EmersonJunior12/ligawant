@@ -1,0 +1,78 @@
+<script type="application/json" id="list-data">__LIST_DATA__</script>
+
+<div class="page-head">
+  <div>
+    <a class="back-link" href="/lists"><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg>Minhas listas</a>
+    <h1 class="sr-only">__HEADING__</h1>
+    <label class="sr-only" for="list-name">Nome da lista</label>
+    <input type="text" id="list-name" class="title-input" maxlength="80" placeholder="Nome da lista">
+  </div>
+  <div class="page-actions">
+    <span id="save-state" class="save-state" role="status" aria-live="polite" hidden></span>
+    <button type="button" id="btn-jpg" class="btn btn-ghost" disabled><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Gerar imagem</button>
+  </div>
+</div>
+
+__MARKET_BAR__
+
+<div class="editor">
+  <section class="panel">
+    <label class="field-label" for="card-search">Adicionar carta</label>
+    <div class="search">
+      <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+      <input type="search" id="card-search" placeholder="Nome em português ou inglês"
+             autocomplete="off" role="combobox" aria-expanded="false" aria-controls="search-results">
+      <span class="search-spinner" id="search-spinner" hidden></span>
+      <ul class="search-results" id="search-results" role="listbox" hidden></ul>
+    </div>
+    <p class="muted small">Busca no Scryfall. Depois de escolher a carta, você escolhe a edição.</p>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Cartas</h2>
+      <div class="panel-head-actions">
+        <span class="muted small" id="card-count"></span>
+        <span class="muted small" id="prices-age"></span>
+        <button type="button" id="btn-refresh" class="btn btn-text btn-sm" hidden
+                title="Busca de novo nos sites ligados (a LigaMagic reaproveita o que foi buscado há menos de 15 min)"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg><span>Atualizar preços</span></button>
+      </div>
+    </div>
+    <ul class="card-rows" id="card-rows"></ul>
+    <p class="empty-inline" id="empty-cards">Nenhuma carta ainda. Busque a primeira acima.</p>
+    <div class="totals" id="totals" hidden>
+      <div class="total-box" data-market="liga">
+        <span class="total-label">Total na LigaMagic<span class="info"><button type="button" class="info-btn" aria-label="Como é calculado o total na LigaMagic" aria-describedby="tip-liga"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg></button><span class="info-tip" role="tooltip" id="tip-liga"><p>Soma de preço unitário × quantidade de cada carta.</p><p>Unitário: menor preço anunciado na LigaMagic para a edição da carta, entre todas as qualidades e idiomas.</p><p>O selo (NM, SP…) é a melhor qualidade em estoque nessa edição, que nem sempre é a do menor preço.</p><p><b>outra ed.</b>: a edição não foi achada na Liga; vale o menor preço entre as outras edições.</p><p>Consulta guardada por até 12 h. <b>Atualizar preços</b> busca de novo.</p></span></span></span>
+        <strong id="total-liga">—</strong>
+        <span class="total-missing muted small" id="missing-liga"></span>
+      </div>
+      <div class="total-box" data-market="tcgplayer">
+        <span class="total-label">Total no TCGplayer<span class="info"><button type="button" class="info-btn" aria-label="Como é calculado o total no TCGplayer" aria-describedby="tip-tcgplayer"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg></button><span class="info-tip" role="tooltip" id="tip-tcgplayer"><p>Soma de preço unitário × quantidade de cada carta.</p><p>Unitário: preço do TCGplayer em US$, via Scryfall, atualizado uma vez por dia.</p><p>Versão que só existe em foil usa o preço foil e aparece marcada como <b>foil</b>.</p></span></span></span>
+        <strong id="total-tcgplayer">—</strong>
+        <span class="total-missing muted small" id="missing-tcgplayer"></span>
+      </div>
+      <div class="total-box" data-market="cardmarket">
+        <span class="total-label">Total no Cardmarket<span class="info"><button type="button" class="info-btn" aria-label="Como é calculado o total no Cardmarket" aria-describedby="tip-cardmarket"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg></button><span class="info-tip" role="tooltip" id="tip-cardmarket"><p>Soma de preço unitário × quantidade de cada carta.</p><p>Unitário: preço do Cardmarket em €, via Scryfall, atualizado uma vez por dia.</p><p>Versão que só existe em foil usa o preço foil e aparece marcada como <b>foil</b>.</p></span></span></span>
+        <strong id="total-cardmarket">—</strong>
+        <span class="total-missing muted small" id="missing-cardmarket"></span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="modal" id="prints-modal" hidden>
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="prints-title">
+    <div class="modal-head">
+      <div>
+        <h2 id="prints-title">Escolha a edição</h2>
+        <p class="muted small" id="prints-subtitle"></p>
+      </div>
+      <button type="button" class="icon-btn" data-close-modal aria-label="Fechar" title="Fechar"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <input type="search" id="prints-filter" placeholder="Filtrar por edição, código ou ano">
+    <div class="prints-grid" id="prints-grid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>

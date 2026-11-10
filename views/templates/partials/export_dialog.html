@@ -1,0 +1,21 @@
+<dialog class="export-dialog" id="export-dialog" aria-labelledby="export-title" data-markets="__MARKETS__">
+  <form class="dialog-body" method="dialog" id="export-form">
+    <h2 id="export-title">Gerar imagem</h2>
+    <p>Baixa um JPG com as cartas da lista, pronto para mandar no grupo.</p>
+    <div class="segmented" role="radiogroup" aria-label="Preços na imagem">
+      <button type="button" class="seg-btn" role="radio" aria-checked="false" data-export-mode="none"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Sem preços</button>
+      <button type="button" class="seg-btn" role="radio" aria-checked="true" data-export-mode="prices"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Com preços</button>
+    </div>
+    <fieldset class="check-list" id="export-markets">
+      <legend class="sr-only">Sites de preço na imagem</legend>
+      <label class="check-row"><input type="checkbox" value="liga"> LigaMagic <small>R$</small></label>
+      <label class="check-row"><input type="checkbox" value="tcgplayer"> TCGplayer <small>US$</small></label>
+      <label class="check-row"><input type="checkbox" value="cardmarket"> Cardmarket <small>€</small></label>
+    </fieldset>
+    <p class="export-status" id="export-status" aria-live="polite"></p>
+    <div class="dialog-actions">
+      <button type="button" class="btn btn-text" data-export-cancel>Cancelar</button>
+      <button type="submit" class="btn btn-primary" id="export-go"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Gerar imagem</button>
+    </div>
+  </form>
+</dialog>

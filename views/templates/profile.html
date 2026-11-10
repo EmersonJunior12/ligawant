@@ -1,0 +1,65 @@
+<div class="page-head">
+  <div>
+    <a class="back-link" href="/lists"><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg>Minhas listas</a>
+    <h1>Perfil</h1>
+  </div>
+</div>
+
+<div class="profile">
+  __NOTICE__
+  <section class="panel">
+    <h2>Usuário</h2>
+    <p class="muted small">É com ele que você entra, e é o nome que aparece nas imagens das listas.</p>
+    __USERNAME_ERROR__
+    <form method="post" action="/profile/username" class="form">
+      <input type="hidden" name="csrf_token" value="__CSRF__">
+      <div class="field">
+      <input id="pf-username" placeholder=" " type="text" name="username" value="__USERNAME_VALUE__" autocomplete="username" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.\-]{3,32}">
+      <label for="pf-username">Usuário</label>
+    </div>
+      <div class="field">
+      <input id="pf-username-pass" placeholder=" " type="password" name="current_password" autocomplete="current-password" required maxlength="256">
+      <label for="pf-username-pass">Senha atual</label>
+    </div>
+      <div><button type="submit" class="btn btn-primary">Salvar usuário</button></div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Senha</h2>
+    <p class="muted small">Ao trocar a senha, as sessões em outros navegadores são encerradas.</p>
+    __PASSWORD_ERROR__
+    <form method="post" action="/profile/password" class="form">
+      <input type="hidden" name="csrf_token" value="__CSRF__">
+      <div class="field">
+      <input id="pf-pass-current" placeholder=" " type="password" name="current_password" autocomplete="current-password" required maxlength="256">
+      <label for="pf-pass-current">Senha atual</label>
+    </div>
+      <div class="field">
+      <input id="pf-pass-new" placeholder=" " type="password" name="new_password" autocomplete="new-password" required minlength="8" maxlength="256">
+      <label for="pf-pass-new">Nova senha</label>
+    </div>
+      <div class="field">
+      <input id="pf-pass-confirm" placeholder=" " type="password" name="confirm_password" autocomplete="new-password" required minlength="8" maxlength="256">
+      <label for="pf-pass-confirm">Confirmar nova senha</label>
+    </div>
+      <div><button type="submit" class="btn btn-primary">Trocar senha</button></div>
+    </form>
+  </section>
+
+  <section class="panel panel-danger">
+    <h2>Excluir conta</h2>
+    <p class="muted small">Apaga sua conta e todas as suas listas. Não dá para desfazer.
+      Contas sem acesso por 6 meses são excluídas automaticamente do mesmo jeito.</p>
+    __DELETE_ERROR__
+    <form method="post" action="/profile/delete" class="form"
+          data-confirm="Excluir sua conta e todas as listas? Isso não pode ser desfeito." data-confirm-action="Excluir conta">
+      <input type="hidden" name="csrf_token" value="__CSRF__">
+      <div class="field">
+      <input id="pf-delete-pass" placeholder=" " type="password" name="current_password" autocomplete="current-password" required maxlength="256">
+      <label for="pf-delete-pass">Senha atual</label>
+    </div>
+      <div><button type="submit" class="btn btn-danger-ghost is-outlined">Excluir conta</button></div>
+    </form>
+  </section>
+</div>
